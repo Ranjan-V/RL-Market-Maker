@@ -314,7 +314,7 @@ MIT License - see LICENSE file for details
 ## 👤 Author
 
 **Your Name**  
-[GitHub](https://github.com/yourusername) | [LinkedIn](https://linkedin.com/in/yourprofile)
+[GitHub](https://github.com/Ranjan-V) | [LinkedIn](https://linkedin.com/in/ranjan-001-v)
 
 ---
 
