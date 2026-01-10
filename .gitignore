@@ -1,0 +1,100 @@
+# ============================================
+# CRITICAL: API Keys and Secrets
+# ============================================
+.env
+*.env
+.env.*
+*.key
+*.pem
+
+# ============================================
+# Python
+# ============================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv
+ENV/
+*.egg-info/
+dist/
+build/
+
+# ============================================
+# Data Files (too large for git)
+# ============================================
+data/raw/*.csv
+data/raw/*.parquet
+data/processed/*.bin
+data/processed/*.h5
+data/logs/*.log
+data/logs/*.json
+
+# ============================================
+# Model Files (too large for git)
+# ============================================
+models/**/*.zip
+models/**/*.pth
+models/**/*.pt
+logs/tensorboard/**/events.out.*
+logs/tensorboard/**/best_model/*.zip
+
+# Keep directory structure but not large files
+!models/ppo/.gitkeep
+!models/sac/.gitkeep
+!data/logs/.gitkeep
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# ============================================
+# Reports (keep small ones, ignore large)
+# ============================================
+reports/**/*.png
+reports/**/*.pdf
+
+# ============================================
+# C++ Build Files
+# ============================================
+cpp/build/
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+CMakeCache.txt
+CMakeFiles/
+
+# ============================================
+# IDE
+# ============================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ============================================
+# Jupyter
+# ============================================
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# ============================================
+# OS
+# ============================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ============================================
+# Temporary Files
+# ============================================
+*.tmp
+*.bak
+*.log
+*.cache

@@ -1,0 +1,34 @@
+============================================================
+MARKET MAKING PERFORMANCE REPORT
+============================================================
+
+Generated: 2026-01-08 14:15:41
+Episodes: 100
+
+COMPARISON SUMMARY
+------------------------------------------------------------
+      Agent   Mean PnL    Std PnL    Sharpe  Win Rate    Max PnL     Min PnL  Avg Inventory  Speed (eps/s)
+  PPO Agent -86.713107  23.546530 -3.682628      0.00 -14.252543 -137.964737       0.023886       0.506373
+  SAC Agent -39.581404 120.271114 -0.329102      0.38 214.272873 -376.051189       0.125348       0.641739
+AS Baseline -41.378625  15.631548 -2.647123      0.01  15.420895  -88.207111       0.015831       2.484451
+
+WINNER: SAC Agent
+Mean PnL: $-39.58
+
+DETAILED METRICS (WINNER)
+------------------------------------------------------------
+total_pnl           : $     -214.36
+mean_pnl            : $      -39.58
+std_pnl             : $      120.27
+median_pnl          : $      -44.34
+min_pnl             : $     -376.05
+max_pnl             : $      214.27
+sharpe_ratio        :       -0.008
+sortino_ratio       :       -0.014
+max_drawdown        : $      -16.21
+calmar_ratio        :      -14.492
+win_rate            : $        0.53
+profit_factor       : $        1.00
+var_95              : $     -261.69
+cvar_95             : $     -310.94
+

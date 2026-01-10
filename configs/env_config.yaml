@@ -1,0 +1,89 @@
+# ============================================
+# MARKET ENVIRONMENT CONFIGURATION
+# ============================================
+
+market:
+  # Core market parameters
+  initial_price: 50000.0          # Starting mid price (e.g., BTC-USD)
+  tick_size: 0.01                 # Minimum price increment
+  lot_size: 0.001                 # Minimum order size
+  
+  # Market dynamics
+  volatility: 0.0002              # Price volatility per tick (20 bps)
+  drift: 0.0                      # Price drift (0 = random walk)
+  liquidity_depth: 100.0          # Depth at each level (in base units)
+  
+  # Trading costs
+  maker_fee: 0.0001               # 1 bp maker fee
+  taker_fee: 0.0004               # 4 bp taker fee
+  
+  # Order book
+  num_levels: 20                  # Levels on each side of book
+  level_spacing: 0.01             # % spacing between levels
+
+agent:
+  # State space
+  max_inventory: 10.0             # Maximum position (±)
+  inventory_penalty: 0.01         # Quadratic inventory cost
+  
+  # Action space (continuous)
+  min_spread: 0.0001              # Minimum bid-ask spread (1 bp)
+  max_spread: 0.01                # Maximum spread (100 bp)
+  min_offset: -0.005              # Min offset from mid (-50 bp)
+  max_offset: 0.005               # Max offset from mid (+50 bp)
+  
+  # Reward shaping
+  pnl_weight: 1.0                 # Weight for raw PnL
+  inventory_weight: 0.01          # Weight for inventory penalty
+  spread_penalty: 0.001           # Penalty for wide spreads
+  adverse_selection_penalty: 0.1  # Penalty for getting picked off
+
+episode:
+  # Episode configuration
+  episode_length: 1000            # Steps per episode
+  warmup_steps: 100               # Steps before trading starts
+  
+  # Market regime changes
+  regime_change_prob: 0.01        # Probability of volatility shift
+  high_vol_multiplier: 3.0        # High volatility = 3x normal
+  
+  # Time features
+  include_time_of_day: true       # Add intraday patterns
+  market_open_hour: 9             # Market open (for simulation)
+  market_close_hour: 16           # Market close
+
+backtesting:
+  # Backtesting specific
+  historical_data: false          # Use real L2 data
+  replay_speed: 1.0               # 1.0 = real-time, 10.0 = 10x speed
+  
+simulation:
+  # Fill probability model
+  fill_exponent: 2.0              # Controls fill probability decay
+  base_fill_rate: 0.5             # Fill rate at mid price
+  
+  # Informed trader simulation
+  informed_trader_prob: 0.1       # % of volume from informed
+  informed_trader_edge: 0.001     # Information advantage (10 bp)
+
+observation:
+  # What the agent sees
+  features:
+    - inventory                   # Current position
+    - mid_price                   # Market mid price
+    - spread                      # Current bid-ask spread
+    - volatility                  # Recent volatility estimate
+    - time_of_day                 # Normalized time [0,1]
+    - recent_pnl                  # Last N steps PnL
+    - order_flow_imbalance        # Buy - sell pressure
+    - microprice                  # Weighted mid based on sizes
+  
+  # Normalization
+  normalize: true
+  lookback_window: 10             # Steps for rolling features
+
+risk:
+  # Risk limits
+  max_loss_per_episode: -1000.0   # Stop loss
+  max_position: 10.0              # Position limit
+  margin_requirement: 0.1         # 10% margin

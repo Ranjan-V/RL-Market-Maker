@@ -1,0 +1,73 @@
+algorithm: PPO
+baseline:
+  as_gamma: 0.1
+  compare_to_as: true
+checkpoint:
+  save_path: ./models
+  save_replay_buffer: false
+deterministic_eval: true
+env_overrides:
+  episode_length: 1000
+  max_inventory: 10.0
+  volatility: 0.0002
+experiment:
+  name: rl_market_maker
+  notes: Training RL agent to beat AS baseline
+  run_name: null
+  tags:
+  - market_making
+  - rl
+logging:
+  tensorboard: true
+  tensorboard_log: ./logs/tensorboard
+  verbose: 1
+ppo:
+  activation_fn: relu
+  batch_size: 64
+  clip_range: 0.2
+  clip_range_vf: null
+  ent_coef: 0.01
+  gae_lambda: 0.95
+  gamma: 0.99
+  learning_rate: 0.0003
+  max_grad_norm: 0.5
+  n_epochs: 10
+  n_steps: 2048
+  net_arch:
+  - 256
+  - 256
+  - 128
+  policy: MlpPolicy
+  sde_sample_freq: -1
+  target_kl: null
+  use_sde: false
+  vf_coef: 0.5
+sac:
+  activation_fn: relu
+  batch_size: 256
+  buffer_size: 100000
+  ent_coef: auto
+  gamma: 0.99
+  gradient_steps: 1
+  learning_rate: 0.0003
+  learning_starts: 1000
+  net_arch:
+  - 256
+  - 256
+  policy: MlpPolicy
+  target_entropy: auto
+  target_update_interval: 1
+  tau: 0.005
+  train_freq: 1
+  use_sde: false
+seed: 42
+training:
+  early_stopping: true
+  eval_episodes: 10
+  eval_freq: 10000
+  log_interval: 10
+  min_improvement: 5.0
+  n_envs: 4
+  patience: 5
+  save_freq: 50000
+  total_timesteps: 500000

@@ -1,0 +1,102 @@
+# ============================================
+# RL TRAINING CONFIGURATION
+# ============================================
+
+# Algorithm selection
+algorithm: "PPO"  # Options: PPO, SAC
+
+# Training
+training:
+  total_timesteps: 500000        # Total steps to train
+  n_envs: 4                      # Parallel environments
+  eval_freq: 10000               # Evaluate every N steps
+  eval_episodes: 10              # Episodes per evaluation
+  save_freq: 50000               # Save model every N steps
+  log_interval: 10               # Log every N updates
+  
+  # Early stopping
+  early_stopping: false          # DISABLED for full training
+  patience: 10                   # Stop if no improvement for N evals
+  min_improvement: 5.0           # Minimum PnL improvement
+
+# PPO Hyperparameters
+ppo:
+  learning_rate: 0.0003
+  n_steps: 2048                  # Steps per update
+  batch_size: 64                 # Minibatch size
+  n_epochs: 10                   # Optimization epochs per update
+  gamma: 0.99                    # Discount factor
+  gae_lambda: 0.95               # GAE parameter
+  clip_range: 0.2                # PPO clip parameter
+  clip_range_vf: null            # Value function clip (null = no clip)
+  ent_coef: 0.01                 # Entropy coefficient
+  vf_coef: 0.5                   # Value function coefficient
+  max_grad_norm: 0.5             # Gradient clipping
+  use_sde: false                 # State-dependent exploration
+  sde_sample_freq: -1
+  target_kl: null                # Target KL divergence
+  
+  # Network architecture
+  policy: "MlpPolicy"
+  net_arch:
+    - 256
+    - 256
+    - 128
+  activation_fn: "relu"          # relu, tanh
+
+# SAC Hyperparameters
+sac:
+  learning_rate: 0.0003
+  buffer_size: 100000            # Replay buffer size
+  learning_starts: 1000          # Start learning after N steps
+  batch_size: 256
+  tau: 0.005                     # Soft update coefficient
+  gamma: 0.99
+  train_freq: 1                  # Update every N steps
+  gradient_steps: 1              # Gradient steps per update
+  ent_coef: "auto"               # Entropy coefficient (auto-tuned)
+  target_update_interval: 1
+  target_entropy: "auto"
+  use_sde: false
+  
+  # Network architecture
+  policy: "MlpPolicy"
+  net_arch:
+    - 256
+    - 256
+  activation_fn: "relu"
+
+# Environment settings (overrides)
+env_overrides:
+  episode_length: 1000
+  volatility: 0.0002
+  max_inventory: 10.0
+
+# Experiment tracking
+experiment:
+  name: "rl_market_maker"
+  run_name: null                 # Auto-generated if null
+  tags:
+    - "market_making"
+    - "rl"
+  notes: "Training RL agent to beat AS baseline"
+  
+# Logging
+logging:
+  tensorboard: true
+  tensorboard_log: "./logs/tensorboard"
+  verbose: 1                     # 0=none, 1=info, 2=debug
+  
+# Checkpointing
+checkpoint:
+  save_path: "./models"
+  save_replay_buffer: false      # Save replay buffer (large!)
+  
+# Comparison
+baseline:
+  compare_to_as: true
+  as_gamma: 0.1                  # AS risk aversion to compare
+
+# Seed
+seed: 42
+deterministic_eval: true
