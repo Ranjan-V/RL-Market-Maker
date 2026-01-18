@@ -313,7 +313,7 @@ MIT License - see LICENSE file for details
 
 ## 👤 Author
 
-**Your Name**  
+**Ranjan V**  
 [GitHub](https://github.com/Ranjan-V) | [LinkedIn](https://linkedin.com/in/ranjan-001-v)
 
 ---
